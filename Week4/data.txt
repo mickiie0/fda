@@ -1,0 +1,5 @@
+1 Jane 18 IT 3.45 Jane
+2 John 18 IT 3.0 John
+3 Alice 18 CS 2.95 Alice
+4 Bob 18 IT 3.98 Bob
+5 Leon 18 CS 2.74 Leon
