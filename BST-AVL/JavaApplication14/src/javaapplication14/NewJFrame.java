@@ -3,6 +3,7 @@ package javaapplication14;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.*;
+import javax.swing.table.DefaultTableModel;
 
 class Citizen {
 
@@ -72,12 +73,29 @@ class Citizen {
     }
 
     @Override
-    public String toString() {return id + "-" + name + "-" + gender + "-" + birthplace + "-" + birthdate;}
-    public String getId() {return id;}
-    public String getName() {return name;}
-    public String getGender() {return gender;}
-    public String getBirthplace() {return birthplace;}
-    public String getBirthdate() {return birthdate;}
+    public String toString() {
+        return id + "-" + name + "-" + gender + "-" + birthplace + "-" + birthdate;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public String getBirthplace() {
+        return birthplace;
+    }
+
+    public String getBirthdate() {
+        return birthdate;
+    }
 }
 
 class Node {
@@ -92,20 +110,30 @@ class Node {
         this.height = 1;
     }
 
-    public Citizen genData() {return data;}
+    public Citizen genData() {
+        return data;
+    }
 
-    public int getHeight() {return height;}
+    public int getHeight() {
+        return height;
+    }
 }
 
 class AVLTree {
 
     private Node root;
 
-    int height(Node N) {return (N == null) ? 0 : N.height;}
+    int height(Node N) {
+        return (N == null) ? 0 : N.height;
+    }
 
-    int max(int a, int b) {return (a > b) ? a : b;}
+    int max(int a, int b) {
+        return (a > b) ? a : b;
+    }
 
-    int getBalance(Node N) {return (N == null) ? 0 : height(N.left) - height(N.right);}
+    int getBalance(Node N) {
+        return (N == null) ? 0 : height(N.left) - height(N.right);
+    }
 
     Node rightRotate(Node y) {
         Node x = y.left;
@@ -288,6 +316,22 @@ public class NewJFrame extends javax.swing.JFrame {
         return tableData;
     }
 
+    public Object[][] buildTableData(Citizen[] arr) {
+        if (arr == null) {
+            return new Object[0][0];
+        }
+        Object[][] rows = new Object[arr.length][5];
+        for (int i = 0; i < arr.length; i++) {
+            Citizen c = arr[i];
+            rows[i][0] = c.getId();
+            rows[i][1] = c.getName();
+            rows[i][2] = c.getGender();
+            rows[i][3] = c.getBirthplace();
+            rows[i][4] = c.getBirthdate();
+        }
+        return rows;
+    }
+
     public NewJFrame() {
         initComponents();
     }
@@ -332,7 +376,7 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("BST");
+        jButton4.setText("BFS");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -454,6 +498,9 @@ public class NewJFrame extends javax.swing.JFrame {
             sb.append(data[i].toString()).append(",   ");
         }
 
+        Object[][] rows = buildTableData(data);
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(rows, ColName));
+
         jTextField1.setText(sb.toString());
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -482,7 +529,7 @@ public class NewJFrame extends javax.swing.JFrame {
         java.util.List<Citizen> preorder = tree.getPreOrderList();
         data1 = buildTableData(preorder);
         jTable2.setModel(new javax.swing.table.DefaultTableModel(data1, ColName));
-        
+
         jTextField2.setText(result);
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -510,7 +557,7 @@ public class NewJFrame extends javax.swing.JFrame {
         //Table
         java.util.List<Citizen> preorder = tree.getPostOrderList();
         data1 = buildTableData(preorder);
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(data1, ColName));
+        jTable2.setModel(new DefaultTableModel(data1, ColName));
     }//GEN-LAST:event_jButton6ActionPerformed
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
